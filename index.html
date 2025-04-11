@@ -1,314 +1,282 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Seguro | Ethical Hacking</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --dark: #212529;
-            --light: #f8f9fa;
-            --danger: #ef233c;
-            --success: #4cc9f0;
-            --border-radius: 12px;
-            --box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: var(--dark);
-        }
-        
-        .security-card {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            width: 100%;
-            max-width: 500px;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-        
-        .security-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .card-header {
-            background: var(--dark);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .card-header h2 {
-            margin: 0;
-            font-weight: 700;
-            font-size: 1.8rem;
-        }
-        
-        .card-header::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
-        }
-        
-        .card-body {
-            padding: 30px;
-        }
-        
-        .form-label {
-            font-weight: 500;
-            margin-bottom: 8px;
-            display: block;
-            color: var(--dark);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: var(--transition);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-        
-        .password-strength {
-            height: 4px;
-            background: #e9ecef;
-            border-radius: 2px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-        
-        .strength-meter {
-            height: 100%;
-            width: 0;
-            background: var(--danger);
-            transition: var(--transition);
-        }
-        
-        .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 14px;
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .btn:hover {
-            background: var(--primary-dark);
-        }
-        
-        .btn:disabled {
-            background: #adb5bd;
-            cursor: not-allowed;
-        }
-        
-        .security-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-        
-        .security-badge i {
-            color: var(--success);
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
-        
-        .invalid-feedback {
-            color: var(--danger);
-            font-size: 0.85rem;
-            margin-top: 5px;
-            display: none;
-        }
-        
-        .form-control:invalid {
-            border-color: var(--danger);
-        }
-        
-        .form-control:invalid ~ .invalid-feedback {
-            display: block;
-        }
-        
-        .honeypot {
-            opacity: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 0;
-            width: 0;
-            z-index: -1;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Seguro | Ethical Hacking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --dark: #212529;
+      --light: #f8f9fa;
+      --danger: #ef233c;
+      --success: #4cc9f0;
+      --warning: #ffbe0b;
+      --border-radius: 12px;
+      --box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: var(--dark);
+    }
+
+    .security-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      width: 100%;
+      max-width: 500px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .security-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      background: var(--dark);
+      color: white;
+      padding: 25px;
+      text-align: center;
+      position: relative;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    .card-header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
+    }
+
+    .card-body {
+      padding: 30px;
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .password-strength {
+      height: 4px;
+      background: #e9ecef;
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .strength-meter {
+      height: 100%;
+      width: 0;
+      background: var(--danger);
+      transition: var(--transition);
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn:disabled {
+      background: #adb5bd;
+      cursor: not-allowed;
+    }
+
+    .security-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    .security-badge i {
+      color: var(--success);
+      margin-right: 8px;
+      font-size: 1.2rem;
+    }
+
+    .invalid-feedback {
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .form-control:invalid ~ .invalid-feedback {
+      display: block;
+    }
+
+    .honeypot {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .card-body {
+        padding: 20px;
+      }
+
+      .card-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        padding: 12px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="security-card">
-        <div class="card-header">
-            <h2><i class="fas fa-shield-alt"></i> Portal Seguro</h2>
-        </div>
-        <div class="card-body">
-            <form id="secureForm" method="POST" action="/procesar-seguro" novalidate>
-                <!-- Honeypot field para bots -->
-                <input type="text" class="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
-                
-                <!-- Token CSRF dinámico -->
-                <input type="hidden" id="csrfToken" name="csrfToken" value="">
-                
-                <!-- Grupo de usuario -->
-                <div class="form-group">
-                    <label for="username" class="form-label">Usuario</label>
-                    <input type="text" class="form-control" id="username" name="username" 
-                           required minlength="4" maxlength="20"
-                           pattern="[a-zA-Z0-9_]+" autocomplete="username"
-                           placeholder="ejemplo_usuario">
-                    <div class="invalid-feedback">El usuario debe tener entre 4-20 caracteres alfanuméricos</div>
-                </div>
-                
-                <!-- Grupo de contraseña -->
-                <div class="form-group">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="password" 
-                           required minlength="12" maxlength="100"
-                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$"
-                           autocomplete="current-password"
-                           placeholder="••••••••••••">
-                    <div class="password-strength">
-                        <div class="strength-meter" id="strengthMeter"></div>
-                    </div>
-                    <div class="invalid-feedback">La contraseña debe contener mayúsculas, minúsculas, números y caracteres especiales (@$!%*?&)</div>
-                </div>
-                
-                <!-- Verificación de seguridad -->
-                <div class="form-group">
-                    <label for="securityCheck" class="form-label">Verificación de seguridad: ¿Cuánto es 7 + 5?</label>
-                    <input type="text" class="form-control" id="securityCheck" name="securityCheck" 
-                           required pattern="^12$"
-                           placeholder="Respuesta numérica">
-                    <div class="invalid-feedback">Respuesta de verificación incorrecta</div>
-                </div>
-                
-                <!-- Botón de envío -->
-                <button type="submit" class="btn" id="submitBtn">
-                    <span id="btnText">Acceder Seguro</span>
-                    <span id="btnSpinner" style="display:none;">
-                        <i class="fas fa-circle-notch fa-spin"></i> Verificando...
-                    </span>
-                </button>
-                
-                <div class="security-badge">
-                    <i class="fas fa-lock"></i>
-                    <span>Conexión segura encriptada</span>
-                </div>
-            </form>
-        </div>
+  <div class="security-card">
+    <div class="card-header">
+      <h2><i class="fas fa-shield-alt"></i> Portal Seguro</h2>
     </div>
+    <div class="card-body">
+      <form id="secureForm" method="POST" action="/procesar-seguro" autocomplete="off" novalidate>
+        <input type="text" class="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
+        <input type="hidden" id="csrfToken" name="csrfToken" value="">
 
-    <!-- Font Awesome para íconos -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    
-    <!-- Script de seguridad -->
-    <script nonce="2726c7f26c7">
-        document.addEventListener('DOMContentLoaded', function() {
-            // Generar token CSRF seguro
-            const csrfToken = crypto.getRandomValues(new Uint32Array(1))[0].toString(16);
-            document.getElementById('csrfToken').value = csrfToken;
-            
-            // Elementos del DOM
-            const form = document.getElementById('secureForm');
-            const passwordInput = document.getElementById('password');
-            const strengthMeter = document.getElementById('strengthMeter');
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = document.getElementById('btnText');
-            const btnSpinner = document.getElementById('btnSpinner');
-            
-            // Medidor de fuerza de contraseña
-            passwordInput.addEventListener('input', function() {
-                const password = passwordInput.value;
-                let strength = 0;
-                
-                // Longitud
-                if (password.length >= 12) strength += 25;
-                if (password.length >= 16) strength += 15;
-                
-                // Complejidad
-                if (/[A-Z]/.test(password)) strength += 15;
-                if (/[a-z]/.test(password)) strength += 15;
-                if (/\d/.test(password)) strength += 15;
-                if (/[@$!%*?&]/.test(password)) strength += 15;
-                
-                // Actualizar medidor
-                strengthMeter.style.width = `${Math.min(strength, 100)}%`;
-                strengthMeter.style.backgroundColor = 
-                    strength < 40 ? 'var(--danger)' : 
-                    strength < 70 ? '#ffbe0b' : 'var(--success)';
-            });
-            
-            // Manejar envío del formulario
-            form.addEventListener('submit', function(e) {
-                if (!form.checkValidity()) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                } else {
-                    // Mostrar spinner y deshabilitar botón
-                    btnText.style.display = 'none';
-                    btnSpinner.style.display = 'inline';
-                    submitBtn.disabled = true;
-                    
-                    // Simular retraso de seguridad (en producción sería una llamada real)
-                    setTimeout(() => {
-                        form.classList.add('was-validated');
-                    }, 1500);
-                }
-            }, false);
-            
-            // Protección contra autocompletado
-            setTimeout(() => {
-                if (passwordInput.value === '') {
-                    passwordInput.value = '';
-                }
-            }, 100);
-        });
-    </script>
+        <div class="form-group">
+          <label for="username" class="form-label">Usuario</label>
+          <input type="text" class="form-control" id="username" name="username" required minlength="4" maxlength="20" pattern="[a-zA-Z0-9_]+" placeholder="ejemplo_usuario">
+          <div class="invalid-feedback">Debe tener 4-20 caracteres alfanuméricos</div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="password" name="password" required minlength="12" maxlength="100" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{12,}$" placeholder="••••••••••••">
+          <div class="password-strength">
+            <div class="strength-meter" id="strengthMeter"></div>
+          </div>
+          <div class="invalid-feedback">Incluye mayúsculas, minúsculas, número y símbolo</div>
+        </div>
+
+        <div class="form-group">
+          <label for="securityCheck" class="form-label">¿Cuánto es 7 + 5?</label>
+          <input type="text" class="form-control" id="securityCheck" name="securityCheck" required pattern="^12$" placeholder="Respuesta numérica">
+          <div class="invalid-feedback">Respuesta incorrecta</div>
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">
+          <span id="btnText">Acceder Seguro</span>
+          <span id="btnSpinner" style="display:none;">Verificando...</span>
+        </button>
+
+        <div class="security-badge">
+          <i class="fas fa-lock"></i>
+          <span>Conexión segura encriptada</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script nonce="2726c7f26c7">
+    document.addEventListener('DOMContentLoaded', function () {
+      // Token CSRF más robusto
+      const token = [...crypto.getRandomValues(new Uint8Array(16))]
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+      document.getElementById('csrfToken').value = token;
+
+      const form = document.getElementById('secureForm');
+      const passwordInput = document.getElementById('password');
+      const strengthMeter = document.getElementById('strengthMeter');
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnSpinner = document.getElementById('btnSpinner');
+
+      passwordInput.addEventListener('input', () => {
+        const pass = passwordInput.value;
+        let strength = 0;
+        if (pass.length >= 12) strength += 25;
+        if (pass.length >= 16) strength += 15;
+        if (/[A-Z]/.test(pass)) strength += 15;
+        if (/[a-z]/.test(pass)) strength += 15;
+        if (/\d/.test(pass)) strength += 15;
+        if (/[@$!%*?&]/.test(pass)) strength += 15;
+        strengthMeter.style.width = `${Math.min(strength, 100)}%`;
+        strengthMeter.style.backgroundColor = strength < 40 ? 'var(--danger)' : strength < 70 ? 'var(--warning)' : 'var(--success)';
+      });
+
+      form.addEventListener('submit', function (e) {
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          e.stopPropagation();
+        } else {
+          btnText.style.display = 'none';
+          btnSpinner.style.display = 'inline';
+          submitBtn.disabled = true;
+          setTimeout(() => {
+            form.classList.add('was-validated');
+          }, 1200);
+        }
+      }, false);
+    });
+  </script>
 </body>
 </html>
